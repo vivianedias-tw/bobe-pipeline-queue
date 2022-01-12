@@ -8,7 +8,7 @@ function sendMessage(message) {
       MessageBody: JSON.stringify(message),
       QueueUrl: `${process.env.AWS_QUEUE_URL}`,
       MessageGroupId: `${process.env.AWS_MESSAGE_GROUP}`,
-      MessageDeduplicationId: "1",
+      MessageDeduplicationId: "2",
     })
     .promise();
 }
