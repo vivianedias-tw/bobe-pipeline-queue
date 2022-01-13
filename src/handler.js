@@ -1,6 +1,6 @@
-const sqsClient = require("./src/sqsClient");
+const sqsClient = require("./sqs/sqsClient");
 
-exports.handler = async (event, context) => {
+const handler = async (event, context) => {
   console.log("Received event:", JSON.stringify(event, null, 2));
   console.log("Received context:", JSON.stringify(context, null, 2));
 
@@ -12,3 +12,5 @@ exports.handler = async (event, context) => {
     throw new Error(`ERROR: ${error}`);
   }
 };
+
+module.exports = handler;
