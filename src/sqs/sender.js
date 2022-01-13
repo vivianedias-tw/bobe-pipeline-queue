@@ -8,7 +8,7 @@ const sender = async (event, context) => {
   let message;
   const records = event.Records;
 
-  if (records.length < 1) {
+  if (records && records.length < 1) {
     return {
       statusCode: 400,
       body: JSON.stringify({
@@ -30,12 +30,10 @@ const sender = async (event, context) => {
       await sqs
         .sendMessage({
           QueueUrl: queueUrl,
-          MessageGroupId: `${process.env.AWS_MESSAGE_GROUP}`,
           MessageBody: JSON.stringify({
             filename,
             filesize,
           }),
-          MessageDeduplicationId: id,
           MessageAttributes: {
             AttributeNameHere: {
               StringValue: "Attribute Value Here",
