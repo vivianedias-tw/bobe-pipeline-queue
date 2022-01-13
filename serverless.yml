@@ -10,17 +10,26 @@ package:
 plugins:
   - serverless-offline
 
+custom:
+  bucket: ${env:AWS_S3_BUCKET}
+
 provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
   region: ${env:AWS_REGION}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "*"
 
 functions:
   hello:
     handler: handler.hello
     events:
-      - http:
-          path: hello-world
-          method: get
-          cors: true
+      - s3:
+          bucket: ${self:custom.bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - suffix: .png

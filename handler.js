@@ -1,15 +1,11 @@
 const hello = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: "Go Serverless v2.0! Your function executed successfully!",
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
+  event.Records.forEach((record) => {
+    const filename = record.s3.object.key;
+    const filesize = record.s3.object.size;
+    console.log(
+      `New .png object has been created: ${filename} (${filesize} bytes)`
+    );
+  });
 };
 
 module.exports = { hello };
