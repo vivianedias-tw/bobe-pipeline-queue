@@ -23,13 +23,28 @@ provider:
       Action:
         - s3:*
       Resource: "*"
+    - Effect: Allow
+      Action:
+        - sqs:SendMessage
+      Resource:
+        - Fn::GetAtt: [BobeQueue, Arn]
 
 functions:
-  hello:
-    handler: handler.hello
+  sender:
+    handler: handler.sender
     events:
       - s3:
           bucket: ${self:custom.bucket}
           event: s3:ObjectCreated:*
           rules:
             - suffix: .png
+      - http:
+          method: post
+          path: sender
+
+resources:
+  Resources:
+    BobeQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "BobeQueue"
