@@ -1,6 +1,7 @@
 service: birds-of-britsh-empire-pipeline # NOTE: update this with your service name
 
 frameworkVersion: "2 || 3"
+useDotenv: true
 
 # Create an optimized package for our functions
 package:
@@ -8,12 +9,12 @@ package:
 
 plugins:
   - serverless-offline
-  - serverless-dotenv-plugin # Load .env as environment variables
 
 provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
+  region: ${env:AWS_REGION}
 
 functions:
   hello:
