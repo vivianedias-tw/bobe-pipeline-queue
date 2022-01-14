@@ -1,7 +1,4 @@
-const AWS = require("aws-sdk");
-
-AWS.config.update({ region: process.env.AWS_REGION });
-const sqs = new AWS.SQS();
+const { sqs, getQueueUrl } = require("./sqs/sqsClient");
 
 const sender = async (event, context) => {
   let statusCode = 200;
@@ -17,16 +14,13 @@ const sender = async (event, context) => {
     };
   }
 
-  const region = context.invokedFunctionArn.split(":")[3];
-  const accountId = context.invokedFunctionArn.split(":")[4];
-  const queueName = "BobeQueue";
-  const queueUrl = `https://sqs.${region}.amazonaws.com/${accountId}/${queueName}`;
+  const queueUrl = getQueueUrl(context);
 
   try {
     const filesToQueue = records.map(async (record) => {
       const filename = record.s3.object.key;
       const filesize = record.s3.object.size;
-      const id = record.s3.object.eTag;
+
       await sqs
         .sendMessage({
           QueueUrl: queueUrl,

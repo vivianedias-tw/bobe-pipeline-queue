@@ -1,3 +1,3 @@
-const sender = require("./src/sqs/sender");
+const sender = require("./src/sender");
 
 module.exports = { sender };
