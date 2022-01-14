@@ -25,7 +25,6 @@ jobs:
         run: |
           cat << EOF > .env
           AWS_REGION=${{ secrets.AWS_REGION }}
-          AWS_QUEUE_URL=${{ secrets.AWS_QUEUE_URL }}
           AWS_MESSAGE_GROUP=${{ secrets.AWS_MESSAGE_GROUP }}
           AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}
           EOF

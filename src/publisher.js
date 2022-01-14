@@ -14,12 +14,13 @@ const sender = async (event, context) => {
     };
   }
 
-  const queueUrl = getQueueUrl(context);
+  const queueUrl = process.env.AWS_QUEUE_URL;
 
   try {
     const filesToQueue = records.map(async (record) => {
       const filename = record.s3.object.key;
       const filesize = record.s3.object.size;
+      const id = record.s3.object.eTag;
 
       await sqs
         .sendMessage({
@@ -28,6 +29,8 @@ const sender = async (event, context) => {
             filename,
             filesize,
           }),
+          MessageGroupId: `${process.env.AWS_MESSAGE_GROUP}`,
+          MessageDeduplicationId: id,
           MessageAttributes: {
             AttributeNameHere: {
               StringValue: "Attribute Value Here",

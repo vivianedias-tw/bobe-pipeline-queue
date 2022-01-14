@@ -1,3 +1,4 @@
-const sender = require("./src/sender");
+const publisher = require("./src/publisher");
+const worker = require("./src/worker");
 
-module.exports = { sender };
+module.exports = { publisher, worker };

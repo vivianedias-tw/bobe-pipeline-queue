@@ -3,12 +3,9 @@ service: birds-of-britsh-empire-pipeline # NOTE: update this with your service n
 frameworkVersion: "2 || 3"
 useDotenv: true
 
-# Create an optimized package for our functions
-package:
-  individually: true
-
 plugins:
   - serverless-offline
+  - serverless-lift
 
 custom:
   bucket: ${env:AWS_S3_BUCKET}
@@ -23,15 +20,19 @@ provider:
       Action:
         - s3:*
       Resource: "*"
-    - Effect: Allow
-      Action:
-        - sqs:SendMessage
-      Resource:
-        - Fn::GetAtt: [BobeQueue, Arn]
+
+constructs:
+  jobs:
+    type: queue
+    fifo: true
+    worker:
+      handler: handler.worker
 
 functions:
   sender:
-    handler: handler.sender
+    handler: handler.publisher
+    environment:
+      AWS_QUEUE_URL: ${construct:jobs.queueUrl}
     events:
       - s3:
           bucket: ${self:custom.bucket}
@@ -41,10 +42,3 @@ functions:
       - http:
           method: post
           path: sender
-
-resources:
-  Resources:
-    BobeQueue:
-      Type: "AWS::SQS::Queue"
-      Properties:
-        QueueName: "BobeQueue"
