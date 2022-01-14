@@ -1,6 +1,6 @@
 const { sqs, getQueueUrl } = require("./sqs/sqsClient");
 
-const sender = async (event, context) => {
+const publisher = async (event, context) => {
   let statusCode = 200;
   let message;
   const records = event.Records;
@@ -58,4 +58,4 @@ const sender = async (event, context) => {
   };
 };
 
-module.exports = sender;
+module.exports = publisher;
