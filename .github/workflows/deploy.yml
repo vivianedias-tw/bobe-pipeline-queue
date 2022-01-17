@@ -80,6 +80,9 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-modules-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
+      - name: Install serverless globally
+        run: pnpm add serverless --global
+
       - name: Download .env file
         uses: actions/download-artifact@v2
         with:
