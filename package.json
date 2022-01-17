@@ -1,11 +1,9 @@
 {
   "name": "bobe-pipeline-queue",
   "version": "0.0.1",
-  "description": "Queue for Birds of the British Empire pipeline ",
-  "main": "handler.js",
+  "description": "Data flow and microservices used in the Birds of the Britsh Empire project",
   "scripts": {
-    "test": "jest",
-    "dev": "NODE_ENV=development sls offline start --stage offline"
+    "test": "jest"
   },
   "keywords": [
     "pipeline",
@@ -14,14 +12,12 @@
   ],
   "author": "Viviane Dias",
   "license": "ISC",
-  "dependencies": {},
   "devDependencies": {
     "eslint": "^8.5.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
     "jest": "^27.4.7",
     "prettier": "^2.5.1",
-    "serverless-lift": "^1.11.0",
-    "serverless-offline": "^8.3.1"
+    "serverless": "^2.72.0"
   }
 }
