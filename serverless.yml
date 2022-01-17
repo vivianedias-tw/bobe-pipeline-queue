@@ -1,0 +1,44 @@
+service: birds-of-britsh-empire-pipeline # NOTE: update this with your service name
+
+frameworkVersion: "2 || 3"
+useDotenv: true
+
+plugins:
+  - serverless-offline
+  - serverless-lift
+
+custom:
+  bucket: ${env:AWS_S3_BUCKET}
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  region: ${env:AWS_REGION}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "*"
+
+constructs:
+  jobs:
+    type: queue
+    fifo: true
+    worker:
+      handler: handler.worker
+
+functions:
+  sender:
+    handler: handler.publisher
+    environment:
+      AWS_QUEUE_URL: ${construct:jobs.queueUrl}
+    events:
+      - s3:
+          bucket: ${self:custom.bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - suffix: .png
+      - http:
+          method: post
+          path: sender

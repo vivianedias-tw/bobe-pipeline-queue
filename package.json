@@ -2,11 +2,10 @@
   "name": "bobe-pipeline-queue",
   "version": "0.0.1",
   "description": "Queue for Birds of the British Empire pipeline ",
-  "main": "index.js",
+  "main": "handler.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "dev": "NODE_ENV=development sls offline start --stage offline"
   },
   "keywords": [
     "pipeline",
@@ -21,7 +20,8 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
     "jest": "^27.4.7",
-    "nodemon": "^2.0.15",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "serverless-lift": "^1.11.0",
+    "serverless-offline": "^8.3.1"
   }
 }
