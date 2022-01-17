@@ -5,7 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "test": "npm test",
-    "dev": "NODE_ENV=development sls offline start --stage offline"
+    "dev": "NODE_ENV=development sls offline start --stage offline",
+    "deploy": "sls deploy"
   },
   "keywords": [
     "sqs",
