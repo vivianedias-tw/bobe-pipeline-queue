@@ -1,0 +1,18 @@
+{
+  "name": "cleanup-text",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "dev": "NODE_ENV=development sls offline start --stage offline",
+    "deploy": "sls deploy"
+  },
+  "author": "Viviane Dias",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "^2.72.0",
+    "serverless-offline": "^8.3.1",
+    "serverless-python-requirements": "^5.3.0"
+  }
+}
