@@ -46,7 +46,7 @@ jobs:
           EOF
 
       - name: Copy .env file to packages
-        run: cp .env ./packages/data-flow-manager
+        run: find packages/cleanup-text packages/data-flow-manager -type d -exec cp .env {} \;
 
       - name: Install serverless globally
         run: pnpm add serverless --global

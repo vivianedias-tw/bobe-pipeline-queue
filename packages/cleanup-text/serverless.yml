@@ -11,6 +11,8 @@ custom:
 provider:
   name: aws
   runtime: python3.6
+  lambdaHashingVersion: 20201221
+  region: ${env:AWS_REGION}
 
 functions:
   numpy:
