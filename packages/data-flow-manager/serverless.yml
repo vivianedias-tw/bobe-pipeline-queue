@@ -29,7 +29,7 @@ constructs:
       handler: handler.worker
 
 functions:
-  sender:
+  publisher:
     handler: handler.publisher
     environment:
       AWS_QUEUE_URL: ${construct:jobs.queueUrl}
@@ -41,4 +41,4 @@ functions:
             - suffix: .png
       - http:
           method: post
-          path: sender
+          path: publisher
