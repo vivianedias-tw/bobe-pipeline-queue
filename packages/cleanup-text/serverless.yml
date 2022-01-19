@@ -1,5 +1,8 @@
 service: cleanup-text
 
+frameworkVersion: "2 || 3"
+useDotenv: true
+
 plugins:
   - serverless-python-requirements
   - serverless-offline
