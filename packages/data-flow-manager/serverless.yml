@@ -1,4 +1,4 @@
-service: birds-of-britsh-empire-pipeline # NOTE: update this with your service name
+service: birds-of-britsh-empire-pipeline
 
 frameworkVersion: "2 || 3"
 useDotenv: true

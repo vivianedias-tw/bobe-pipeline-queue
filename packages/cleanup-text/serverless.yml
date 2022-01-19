@@ -4,19 +4,18 @@ frameworkVersion: "2 || 3"
 useDotenv: true
 
 plugins:
-  - serverless-python-requirements
   - serverless-offline
-
-custom:
-  pythonRequirements:
-    dockerizePip: non-linux
 
 provider:
   name: aws
-  runtime: python3.6
+  runtime: python3.8
   lambdaHashingVersion: 20201221
   region: ${env:AWS_REGION}
 
 functions:
-  numpy:
+  cleanup-text:
     handler: handler.main
+    events:
+      - httpApi:
+          method: post
+          path: /cleanup-text
