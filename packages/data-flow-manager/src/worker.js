@@ -1,11 +1,10 @@
 const worker = function (event, context) {
   // SQS may invoke with multiple messages
   for (const message of event.Records) {
-    const bodyData = JSON.parse(message.body);
-    console.log("BODY DATA", bodyData);
+    const message = JSON.parse(message);
+    console.log("MESSAGE", message);
 
-    const fileName = bodyData.fileName;
-    return fileName;
+    return message.body;
   }
 };
 
