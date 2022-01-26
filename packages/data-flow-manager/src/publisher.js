@@ -19,7 +19,6 @@ const publisher = async (event, context) => {
   try {
     const filesToQueue = records.map(async (record) => {
       const filename = record.s3.object.key;
-      const filesize = record.s3.object.size;
       const id = record.s3.object.eTag;
 
       await sqs
@@ -27,13 +26,12 @@ const publisher = async (event, context) => {
           QueueUrl: queueUrl,
           MessageBody: JSON.stringify({
             filename,
-            filesize,
           }),
           MessageGroupId: `${process.env.AWS_MESSAGE_GROUP}`,
           MessageDeduplicationId: id,
           MessageAttributes: {
-            AttributeNameHere: {
-              StringValue: "Attribute Value Here",
+            Service: {
+              Value: "cleanup-text",
               DataType: "String",
             },
           },

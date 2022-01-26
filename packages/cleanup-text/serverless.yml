@@ -1,0 +1,21 @@
+service: cleanup-text
+
+frameworkVersion: "2 || 3"
+useDotenv: true
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  region: ${env:AWS_REGION}
+
+functions:
+  cleanup-text:
+    handler: handler.main
+    events:
+      - httpApi:
+          method: post
+          path: /cleanup-text

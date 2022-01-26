@@ -1,4 +1,4 @@
-service: birds-of-britsh-empire-pipeline # NOTE: update this with your service name
+service: birds-of-britsh-empire-pipeline
 
 frameworkVersion: "2 || 3"
 useDotenv: true
@@ -29,7 +29,7 @@ constructs:
       handler: handler.worker
 
 functions:
-  sender:
+  publisher:
     handler: handler.publisher
     environment:
       AWS_QUEUE_URL: ${construct:jobs.queueUrl}
@@ -41,4 +41,4 @@ functions:
             - suffix: .png
       - http:
           method: post
-          path: sender
+          path: publisher

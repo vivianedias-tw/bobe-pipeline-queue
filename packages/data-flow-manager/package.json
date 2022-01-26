@@ -1,0 +1,25 @@
+{
+  "name": "data-flow-manager",
+  "version": "0.0.1",
+  "description": "Configures s3 trigger, sqs queue and worker",
+  "main": "handler.js",
+  "scripts": {
+    "test": "npm test",
+    "dev": "NODE_ENV=development sls offline start --stage offline",
+    "deploy": "sls deploy"
+  },
+  "keywords": [
+    "sqs",
+    "queue",
+    "lambda",
+    "serverless",
+    "worker",
+    "s3"
+  ],
+  "author": "Viviane Dias",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-lift": "^1.11.0",
+    "serverless-offline": "^8.3.1"
+  }
+}
