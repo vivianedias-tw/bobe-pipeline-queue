@@ -20,7 +20,7 @@ const worker = function (event, context) {
 
     invokeLambda(params, context);
 
-    return parsedBody;
+    return message.body;
   }
 };
 
