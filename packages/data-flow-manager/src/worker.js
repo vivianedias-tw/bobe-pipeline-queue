@@ -1,10 +1,26 @@
+const invokeLambda = require("./lambda/invoke");
+
 const worker = function (event, context) {
-  // SQS may invoke with multiple messages
   for (const message of event.Records) {
     console.log("MESSAGE", message);
-    const parsedMessage = JSON.parse(message);
 
-    return parsedMessage.body;
+    const { messageAttributes } = message;
+
+    const lambdaName =
+      messageAttributes &&
+      messageAttributes.Service &&
+      messageAttributes.Service.stringValue;
+
+    const params = {
+      FunctionName: lambdaName,
+      InvocationType: "RequestResponse",
+      LogType: "Tail",
+      Payload: message.body,
+    };
+
+    invokeLambda(params, context);
+
+    return parsedBody;
   }
 };
 
