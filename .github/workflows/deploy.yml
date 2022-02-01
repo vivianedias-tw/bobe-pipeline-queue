@@ -2,7 +2,7 @@ name: Deploy AWS Lambda Function
 
 on:
   push:
-    branches: [feature/monorepo]
+    branches: [feature/integration, main]
   pull_request:
     branches: [main]
 
