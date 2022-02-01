@@ -31,7 +31,7 @@ const publisher = async (event, context) => {
           MessageDeduplicationId: id,
           MessageAttributes: {
             Service: {
-              Value: "cleanup-text",
+              StringValue: "cleanup-text",
               DataType: "String",
             },
           },
