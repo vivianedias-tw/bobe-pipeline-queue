@@ -1,4 +1,4 @@
-const { sqs, getQueueUrl } = require("./sqs/sqsClient");
+const sqs = require("./sqs/sqsClient");
 
 const publisher = async (event, context) => {
   let statusCode = 200;
