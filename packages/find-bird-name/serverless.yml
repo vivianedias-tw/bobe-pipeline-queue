@@ -1,0 +1,15 @@
+service: find-bird-name
+
+frameworkVersion: "2 || 3"
+useDotenv: true
+variablesResolutionMode: 20210326
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  region: ${env:AWS_REGION}
+
+functions:
+  find-bird-name:
+    handler: handler.main
