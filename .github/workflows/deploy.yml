@@ -2,7 +2,7 @@ name: Deploy AWS Lambda Function
 
 on:
   push:
-    branches: [feature/integration, main]
+    branches: [feature/step-functions, main]
   pull_request:
     branches: [main]
 
