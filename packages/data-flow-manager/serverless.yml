@@ -9,6 +9,8 @@ plugins:
 
 custom:
   bucket: ${env:AWS_S3_BUCKET}
+  findBirdNameService: "birds-of-britsh-empire-pipeline"
+  createBirdDescriptionService: "birds-of-britsh-empire-pipeline"
 
 provider:
   name: aws
@@ -20,13 +22,6 @@ provider:
       Action:
         - s3:*
       Resource: "*"
-
-constructs:
-  jobs:
-    type: queue
-    fifo: true
-    worker:
-      handler: handler.worker
 
 functions:
   publisher:
@@ -42,3 +37,5 @@ functions:
       - http:
           method: post
           path: publisher
+
+stepFunctions: ${file(step-functions.yml)}

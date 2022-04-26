@@ -1,0 +1,21 @@
+# How do we call the step function using `publisher` lambda?
+
+stateMachines:
+  createBirdPage:
+    name: ${self:service}-${opt:stage}-createBirdStateMachine
+      events:
+        - http:
+            path: posts/create
+            method: POST
+    definition:
+      Comment: "Creates a bird page with a picture, name and a description"
+      StartAt: FIND_BIRD_NAME
+      States:
+        FIND_BIRD_NAME:
+          Type: Task
+          Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:custom.findBirdNameService}-${opt:stage}-findBirdName
+          Next: CREATE_BIRD_DESCRIPTION
+        CREATE_BIRD_DESCRIPTION:
+          Type: Task
+          Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:custom.createBirdDescriptionService}-${opt:stage}-createBirdDescription
+          End: true
