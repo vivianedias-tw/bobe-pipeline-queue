@@ -2,6 +2,7 @@ service: birds-of-britsh-empire-pipeline
 
 frameworkVersion: "2 || 3"
 useDotenv: true
+variablesResolutionMode: 20210326
 
 plugins:
   - serverless-offline
