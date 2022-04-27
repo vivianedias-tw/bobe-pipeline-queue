@@ -3,10 +3,10 @@
 stateMachines:
   createBirdPage:
     name: ${self:service}-${opt:stage}-createBirdStateMachine
-      events:
-        - http:
-            path: posts/create
-            method: POST
+    events:
+      - http:
+          path: posts/create
+          method: POST
     definition:
       Comment: "Creates a bird page with a picture, name and a description"
       StartAt: FIND_BIRD_NAME
