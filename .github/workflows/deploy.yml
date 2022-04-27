@@ -41,7 +41,7 @@ jobs:
           EOF
 
       - name: Copy .env file to packages
-        run: find packages/cleanup-text packages/data-flow-manager -type d -exec cp .env {} \;
+        run: find packages/create-bird-description packages/data-flow-manager packages/find-bird-name -type d -exec cp .env {} \;
 
       - name: Install serverless globally
         run: pnpm add serverless --global
