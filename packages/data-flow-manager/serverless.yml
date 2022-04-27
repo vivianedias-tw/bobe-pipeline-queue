@@ -7,6 +7,7 @@ variablesResolutionMode: 20210326
 plugins:
   - serverless-offline
   - serverless-lift
+  - serverless-step-functions
 
 custom:
   bucket: ${env:AWS_S3_BUCKET}
@@ -27,8 +28,6 @@ provider:
 functions:
   publisher:
     handler: handler.publisher
-    environment:
-      AWS_QUEUE_URL: ${construct:jobs.queueUrl}
     events:
       - s3:
           bucket: ${self:custom.bucket}

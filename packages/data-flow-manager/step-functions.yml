@@ -2,7 +2,7 @@
 
 stateMachines:
   createBirdPage:
-    name: ${self:service}-${opt:stage}-createBirdStateMachine
+    name: ${self:service}-${sls:stage}-createBirdStateMachine
     events:
       - http:
           path: posts/create
@@ -13,9 +13,9 @@ stateMachines:
       States:
         FIND_BIRD_NAME:
           Type: Task
-          Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:custom.findBirdNameService}-${opt:stage}-findBirdName
+          Resource: arn:aws:lambda:${self:provider.region}:${aws:accountId}:function:${self:custom.findBirdNameService}-${sls:stage}-findBirdName
           Next: CREATE_BIRD_DESCRIPTION
         CREATE_BIRD_DESCRIPTION:
           Type: Task
-          Resource: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:custom.createBirdDescriptionService}-${opt:stage}-createBirdDescription
+          Resource: arn:aws:lambda:${self:provider.region}:${aws:accountId}:function:${self:custom.createBirdDescriptionService}-${sls:stage}-createBirdDescription
           End: true
